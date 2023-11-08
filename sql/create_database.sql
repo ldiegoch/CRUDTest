@@ -1,0 +1,7 @@
+USE master;
+GO
+IF DB_ID (N'BDCrudTest') IS NOT NULL
+DROP DATABASE mytest;
+GO
+CREATE DATABASE BDCrudTest;
+GO

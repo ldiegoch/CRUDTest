@@ -1,0 +1,4 @@
+USE BDCrudTest;
+GO
+CREATE SCHEMA co;
+GO
