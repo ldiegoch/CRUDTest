@@ -36,5 +36,16 @@ namespace CRUDTest.Repositories
             }
             return list;
         }
+
+        public bool ExecProcedure(SqlCommand cmd)
+        {
+            using (connection)
+            {
+                cmd.Connection = connection;
+                connection.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+        }
     }
 }

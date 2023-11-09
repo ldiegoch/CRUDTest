@@ -47,7 +47,7 @@
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/">Productos</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Categorias">Categorias</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Categories">Categorias</a></li>
                     </ul>
                 </div>
             </div>
