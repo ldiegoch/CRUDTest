@@ -8,8 +8,8 @@
             <Columns>
                 <asp:BoundField DataField="Id" HeaderText="Id" />
                 <asp:BoundField DataField="Name" HeaderText="Nombre" />
-                <asp:BoundField DataField="IsActive" HeaderText="Is Active" />
-                <asp:TemplateField>
+                <asp:CheckBoxField DataField="IsActive" HeaderText="Activa" />
+                <asp:TemplateField HeaderText="Acciones" >
                     <ItemTemplate>
                         <asp:LinkButton runat="server" CommandArgument='<%# Eval("Id") %>'
                             OnClick="Editar_Click" CssClass="btn btn-sm btn-primary"> Editar</asp:LinkButton>
