@@ -13,6 +13,14 @@ textarea {
     max-width: 280px;
 }
 
+.columns {
+    display: flex;
+}
+
+.left {
+    flex: 1 1 60%;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .body-content {

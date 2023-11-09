@@ -1,28 +1,23 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Categories.aspx.cs" Inherits="CRUDTest.Categories" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
     <main>
-        <div class="row">
-            <div>
-                <h1>Categories</h1>
-               
-            </div>
-            <asp:Label ID="lblTitulo" runat="server" CssClass="fs-4 fw-bold"></asp:Label>
-
-    <div class="mb-3">
-        <label class="form-label">Nombre</label>
-        <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
-    </div>
-      <div class="mb-3">
-        <label class="form-label">Activa</label>
-          <asp:CheckBox ID="ckActiva" runat="server" CssClass="form-control"></asp:CheckBox>
-    </div>
-
-    <asp:Button ID="btnSubmit" runat="server" Text="Enviar" CssClass="btn btn-sm btn-primary" OnClick="btnSubmit_Click" />
-    <asp:LinkButton runat="server" PostBackUrl="~/Default.aspx"  CssClass="btn btn-sm btn-warning">Volver</asp:LinkButton>
-            
-        </div>
+        <h1>Categories</h1>
+        <asp:LinkButton runat="server" PostBackUrl="~/New.aspx" CssClass="btn btn-sm btn-warning">Create</asp:LinkButton>
+        <asp:GridView ID="CategoriesGrid" runat="server" CssClass="table table-bordered" AutoGenerateColumns="false">
+            <Columns>
+                <asp:BoundField DataField="Id" HeaderText="Id" />
+                <asp:BoundField DataField="Name" HeaderText="Nombre" />
+                <asp:BoundField DataField="IsActive" HeaderText="Is Active" />
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton runat="server" CommandArgument='<%# Eval("Id") %>'
+                            OnClick="Editar_Click" CssClass="btn btn-sm btn-primary"> Editar</asp:LinkButton>
+                        <asp:LinkButton runat="server" CommandArgument='<%# Eval("Id") %>'
+                            OnClick="Eliminar_Click" CssClass="btn btn-sm btn-danger" OnClientClick="return confirm('Desea eliminar?')"> Eliminar</asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
     </main>
-
 </asp:Content>
