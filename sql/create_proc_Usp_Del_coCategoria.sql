@@ -1,7 +1,7 @@
 USE BDCrudTest;
 GO
-CREATE PROC [co].[Usp_Del_Co_Categoria] @nIdCategory INT
+CREATE PROC [co].[Usp_Del_Co_Categoria] @nIdCategori INT
 AS
 DELETE FROM [co].[coCategoria]
-WHERE nIdCategori = @nIdCategory;
+WHERE nIdCategori = @nIdCategori;
 GO

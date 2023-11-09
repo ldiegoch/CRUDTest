@@ -25,31 +25,52 @@ namespace CRUDTest
         {
             if (!IsPostBack)
             {
-                List<Category> categories = categoryRepository.GetCategories();
-                Category firstCategory = categories[0];
-
-                CategoriesGrid.DataSource = categories;
-                CategoriesGrid.DataBind();
+                LoadCategories();
             }
+        }
+
+        protected void LoadCategories()
+        {
+            var categoryRepository = new CategoryRepository();
+            List<Category> categories = categoryRepository.GetCategories();
+            CategoriesGrid.DataSource = categories;
+            CategoriesGrid.DataBind();
         }
 
         protected void Editar_Click(object sender, EventArgs e)
         {
-            /*LinkButton btn = (LinkButton)sender;
-            string idEmpleado = btn.CommandArgument;
+            LinkButton btn = (LinkButton)sender;
+            string idCategory = btn.CommandArgument;
 
-            Response.Redirect($"~/Contact.aspx?idEmpleado={idEmpleado}");*/
+            Response.Redirect($"~/New.aspx?idCategory={idCategory}");
         }
 
         protected void Eliminar_Click(object sender, EventArgs e)
         {
-           /* LinkButton btn = (LinkButton)sender;
-            string idEmpleado = btn.CommandArgument;
+            LinkButton btn = (LinkButton)sender;
+            int idCategory = Convert.ToInt32(btn.CommandArgument);
 
-            bool respuesta = empleadoBL.Eliminar(Convert.ToInt32(idEmpleado));
+            bool hasProducts = checkForAssociatedProducts(idCategory);
 
-            if (respuesta)
-                MostrarEmpleados();*/
+            if (hasProducts)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('La Categoria tiene productos asociados. Primero elimine los productos asociados.')", true);
+            }
+            else
+            {
+                bool respuesta = categoryRepository.DeleteCategory(idCategory);
+                if (respuesta)
+                {
+                    LoadCategories();
+                }
+            }
+        }
+
+        protected bool checkForAssociatedProducts(int categoryId)
+        {
+            var productRepository = new ProductoRepositorio();
+            List<Product> products = productRepository.GetProducts(categoryId);
+            return products.Count > 0;
         }
     }
 }

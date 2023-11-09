@@ -6,6 +6,7 @@
         
         <div>
             <asp:Label ID="lblTitulo" runat="server" CssClass="fs-4 fw-bold"></asp:Label>
+            <asp:HiddenField ID="categoryIdHidden" runat="server" />
 
             <div class="mb-3">
                 <label class="form-label">Nombre</label>

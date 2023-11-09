@@ -7,7 +7,7 @@ using System.Web;
 
 namespace CRUDTest.Repositories
 {
-    public class CategoryRepository:Repository
+    public class CategoryRepository : Repository
     {
         public List<Category> GetCategories()
         {
@@ -20,6 +20,37 @@ namespace CRUDTest.Repositories
             catch (Exception ex)
             {
                 throw new Exception("No pudimos cargar las Categorias", ex);
+            }
+        }
+
+        public Category GetCategory(int id)
+        {
+            try
+            {
+                // We are retrieving data about a Category
+                var cmd = new SqlCommand("SELECT  Id, Nombre, EsActiva FROM [co].[Categoria] WHERE Id = @id");
+                cmd.Parameters.AddWithValue("id", id);
+                return GetObject<Category>(cmd);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No pudimos cargar las Categorias", ex);
+            }
+        }
+
+        public Boolean CreateCategory(Category category)
+        {
+            try
+            {
+                var cmd = new SqlCommand("[co].[Usp_Ins_Co_Categoria]");
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add("NombreCategoria", System.Data.SqlDbType.VarChar).Value = category.Name;
+                cmd.Parameters.Add("EsActiva", System.Data.SqlDbType.Bit).Value = category.IsActive;
+                return ExecProcedure(cmd);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("No pudimos crear la categoria: {0}", category.Name), ex);
             }
         }
 
@@ -38,20 +69,20 @@ namespace CRUDTest.Repositories
             }
         }
 
-        public Boolean UpdateCategory(int CategoryId, string Name, bool isActive)
+        public Boolean UpdateCategory(Category category)
         {
             try
             {
-                var cmd = new SqlCommand("[co].[Usp_Del_Co_Categoria]");
+                var cmd = new SqlCommand("[co].[Usp_Upd_Co_Categoria]");
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("nIdCategori", System.Data.SqlDbType.Int).Value = CategoryId;
-                cmd.Parameters.Add("NombreCategoria", System.Data.SqlDbType.VarChar).Value = Name;
-                cmd.Parameters.Add("nIdCategori", System.Data.SqlDbType.Bit).Value = isActive;
+                cmd.Parameters.Add("nIdCategori", System.Data.SqlDbType.Int).Value = category.Id;
+                cmd.Parameters.Add("NombreCategoria", System.Data.SqlDbType.VarChar).Value = category.Name;
+                cmd.Parameters.Add("EsActiva", System.Data.SqlDbType.Bit).Value = category.IsActive;
                 return ExecProcedure(cmd);
             }
             catch (Exception ex)
             {
-                throw new Exception(string.Format("No pudimos actualizar la categoria: {0}", CategoryId), ex);
+                throw new Exception(string.Format("No pudimos actualizar la categoria: {0}", category.Name), ex);
             }
         }
     }

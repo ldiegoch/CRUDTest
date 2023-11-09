@@ -25,6 +25,6 @@ namespace CRUDTest.Repositories
             {
                 throw new Exception("No pudimos cargar los Productos", ex);
             }
-        }
+        } 
     }
 }

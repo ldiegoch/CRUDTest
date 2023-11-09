@@ -37,6 +37,25 @@ namespace CRUDTest.Repositories
             return list;
         }
 
+        public T GetObject<T>(SqlCommand cmd) where T : DatabaseObject, new()
+        {
+            using (connection)
+            {
+                cmd.Connection = connection;
+                connection.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    T obj = new T();
+                    obj.LoadData(reader);
+                    return obj;
+                } else
+                {
+                    throw new Exception("No pudimos obtener el objecto");
+                }
+            }
+        }
+
         public bool ExecProcedure(SqlCommand cmd)
         {
             using (connection)

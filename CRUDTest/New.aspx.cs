@@ -7,13 +7,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using CRUDTest.Repositories;
+using CRUDTest.Models;
 
 namespace CRUDTest
 {
     public partial class New : System.Web.UI.Page
     {
         private CategoryRepository categoryRepository;
-        private int idCategory = 0;
 
         public New() {
             categoryRepository = new CategoryRepository();
@@ -23,9 +23,9 @@ namespace CRUDTest
         {
             if (!Page.IsPostBack)
             {
-                if (Request.QueryString["idEmpleado"] != null)
+                if (Request.QueryString["idCategory"] != null)
                 {
-                    idCategory = Convert.ToInt32(Request.QueryString["idCategory"].ToString());
+                    int idCategory = Convert.ToInt32(Request.QueryString["idCategory"].ToString());
 
                     if (idCategory != 0)
                     {
@@ -46,45 +46,42 @@ namespace CRUDTest
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            /*Empleado entidad = new Empleado()
+            Category categoria = new Category()
             {
-                IdEmpleado = idEmpleado,
-                NombreCompleto = txtNombreCompleto.Text,
-                Departamento = new Departamento() { IdDepartamento = Convert.ToInt32(ddlDepartamento.SelectedValue) },
-                Sueldo = Convert.ToDecimal(txtSueldo.Text, new CultureInfo("es-PE")),
-                FechaContrato = txtFechaContrato.Text
+                Id = Convert.ToInt32(categoryIdHidden.Value),
+                Name = txtNombre.Text,
+                IsActive = ckActiva.Checked,
             };
 
             bool respuesta;
 
-            if (idEmpleado != 0)
-                respuesta = empleadoBL.Editar(entidad);
+            if (categoria.Id != 0)
+                respuesta = categoryRepository.UpdateCategory(categoria);
             else
-                respuesta = empleadoBL.Crear(entidad);
+                respuesta = categoryRepository.CreateCategory(categoria);
 
             if (respuesta)
-                Response.Redirect("~/Default.aspx");
-            else*/
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('No se pudo realizar la operacion')", true);
+                Response.Redirect("~/Categories.aspx");
+            else
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('No se pudo realizar la operacion')", true);
         }
 
         private void loadCategory(int categoryId)
         {
             lblTitulo.Text = "Editar Categoria";
             btnSubmit.Text = "Actualizar";
+            categoryIdHidden.Value = categoryId.ToString();
 
-            /*Category category = categoryRepository.Obtener(idEmpleado);
-            txtNombreCompleto.Text = empleado.NombreCompleto;
-            CargarDepartamentos(empleado.Departamento.IdDepartamento.ToString());
-            txtSueldo.Text = empleado.Sueldo.ToString();
-            txtFechaContrato.Text = Convert.ToDateTime(empleado.FechaContrato, new CultureInfo("es-PE")).ToString("yyyy-MM-dd");
-            */
+            Category category = categoryRepository.GetCategory(categoryId);
+            txtNombre.Text = category.Name;
+            ckActiva.Checked = category.IsActive;
         }
 
         private void prepareNewCategory()
         {
             lblTitulo.Text = "Nueva Categoria";
             btnSubmit.Text = "Guardar";
+            categoryIdHidden.Value = "0";
         }
     }
 }
