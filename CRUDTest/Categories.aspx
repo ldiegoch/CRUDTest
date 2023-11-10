@@ -33,5 +33,10 @@
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
+        <asp:PlaceHolder runat="server">
+            <%: Scripts.Render("~/Scripts/jquery-ui.min.js") %>
+            <%: Scripts.Render("~/Scripts/form.js") %>
+
+        </asp:PlaceHolder>
     </main>
 </asp:Content>
