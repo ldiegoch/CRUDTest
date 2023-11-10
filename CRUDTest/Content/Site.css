@@ -13,12 +13,20 @@ textarea {
     max-width: 280px;
 }
 
-.columns {
+.table-header {
     display: flex;
 }
 
-.left {
-    flex: 1 1 60%;
+    .table-header h1 {
+        flex: 1 1;
+    }
+
+    .table-header .filter {
+        align-self: center;
+    }
+
+.content-center {
+    text-align: center;
 }
 
 /* Responsive: Portrait tablets and up */

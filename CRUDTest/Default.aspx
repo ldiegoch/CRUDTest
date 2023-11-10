@@ -4,10 +4,13 @@
 
     <main>
         <div class="row">
-            <div>
+            <div class="table-header">
                 <h1>Productos</h1>
-                <asp:DropDownList runat="server" ID="DropDownCategories" Height="30px" Width="250px" OnSelectedIndexChanged="DropDownCategories_SelectedIndexChanged" AutoPostBack="true">
-                </asp:DropDownList>
+                <label class="filter" for="DropDownCategories">
+                    Categoria: 
+                 <asp:DropDownList runat="server" ID="DropDownCategories" Height="30px" Width="250px" OnSelectedIndexChanged="DropDownCategories_SelectedIndexChanged" AutoPostBack="true">
+                 </asp:DropDownList>
+                </label>
             </div>
 
             <asp:GridView ID="Products" runat="server" CssClass="table table-bordered" AutoGenerateColumns="false">
@@ -17,7 +20,7 @@
                     <asp:BoundField DataField="Price" HeaderText="Precio" DataFormatString="{0:C}" />
                     <asp:BoundField DataField="CategoryName" HeaderText="CategoryName" />
                 </Columns>
-
+                <EmptyDataTemplate>No encontramos productos asociados</EmptyDataTemplate>
             </asp:GridView>
         </div>
     </main>
