@@ -29,11 +29,10 @@ namespace CRUDTest
             }
         }
 
-        protected void ToggleForm()
+        protected void ToggleForm(bool visibility)
         {
-            bool visibility = FormPanel.Visible;
-            FormPanel.Visible = !visibility;
-            BtnCreate.Visible = visibility;
+            FormPanel.Visible = visibility;
+            BtnCreate.Visible = !visibility;
         }
 
         protected void LoadCategories()
@@ -51,7 +50,7 @@ namespace CRUDTest
             categoryIdHidden.Value = idCategory;
             lblTitulo.Text = "Editar Categoría";
             loadCategory(Convert.ToInt32(idCategory));
-            ToggleForm();
+            ToggleForm(true);
         }
 
         protected void Eliminar_Click(object sender, EventArgs e)
@@ -99,7 +98,10 @@ namespace CRUDTest
                 respuesta = categoryRepository.CreateCategory(categoria);
 
             if (respuesta)
-                Response.Redirect("~/Categories.aspx");
+            {
+                ToggleForm(false);
+                LoadCategories();
+            }
             else
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('No se pudo realizar la operacion')", true);
         }
@@ -108,7 +110,7 @@ namespace CRUDTest
         {
             categoryIdHidden.Value = "0";
             lblTitulo.Text = "Crear Categoría";
-            ToggleForm();
+            ToggleForm(true);
         }
 
         private void loadCategory(int categoryId)
