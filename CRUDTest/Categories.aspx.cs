@@ -62,7 +62,7 @@ namespace CRUDTest
 
             if (hasProducts)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('La Categoria tiene productos asociados. Primero elimine los productos asociados.')", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Esta categoria tiene productos asociados y no puede ser borrada.')", true);
             }
             else
             {
