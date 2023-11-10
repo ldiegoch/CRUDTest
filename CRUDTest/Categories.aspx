@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Categories.aspx.cs" Inherits="CRUDTest.Categories" %>
+﻿<%@ Page Title="Categorías" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Categories.aspx.cs" Inherits="CRUDTest.Categories" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <main>
         <div class="table-header">
-            <h1>Categories</h1>
-            <asp:LinkButton ID="BtnCreate" runat="server" OnClick="BtnCreate_Click" CssClass="btn btn-sm btn-warning filter">Create</asp:LinkButton>
+            <h1>Categorías</h1>
+            <asp:LinkButton ID="BtnCreate" runat="server" OnClick="BtnCreate_Click" CssClass="btn btn-sm btn-warning filter">Nueva Categoría</asp:LinkButton>
         </div>
         <asp:Panel ID="FormPanel" runat="server" Visible="false">
             <asp:Label ID="lblTitulo" runat="server" CssClass="fs-4 fw-bold"></asp:Label>
@@ -28,7 +28,7 @@
                         <asp:LinkButton runat="server" CommandArgument='<%# Eval("Id") %>'
                             OnClick="Editar_Click" CssClass="btn btn-sm btn-primary"> Editar</asp:LinkButton>
                         <asp:LinkButton runat="server" CommandArgument='<%# Eval("Id") %>'
-                            OnClick="Eliminar_Click" CssClass="btn btn-sm btn-danger" OnClientClick="return confirm('Desea eliminar?')"> Eliminar</asp:LinkButton>
+                            OnClick="Eliminar_Click" CssClass="btn btn-sm btn-danger" OnClientClick="return confirm('Esta seguro que desea eliminar la categoría?')"> Eliminar</asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

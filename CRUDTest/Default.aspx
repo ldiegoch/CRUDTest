@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CRUDTest._Default" %>
+﻿<%@ Page Title="Productos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CRUDTest._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -18,7 +18,7 @@
                     <asp:BoundField DataField="Id" HeaderText="Id" HeaderStyle-Width="40px" />
                     <asp:BoundField DataField="Name" HeaderText="Nombre" />
                     <asp:BoundField DataField="Price" HeaderText="Precio" DataFormatString="{0:n2}" HeaderStyle-Width="15%" ItemStyle-CssClass="price" />
-                    <asp:BoundField DataField="CategoryName" HeaderText="CategoryName" HeaderStyle-Width="30%" />
+                    <asp:BoundField DataField="CategoryName" HeaderText="Categoría" HeaderStyle-Width="30%" />
                 </Columns>
                 <EmptyDataTemplate>No encontramos productos asociados</EmptyDataTemplate>
             </asp:GridView>

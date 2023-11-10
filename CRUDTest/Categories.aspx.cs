@@ -49,10 +49,9 @@ namespace CRUDTest
             LinkButton btn = (LinkButton)sender;
             string idCategory = btn.CommandArgument;
             categoryIdHidden.Value = idCategory;
+            lblTitulo.Text = "Editar Categoría";
             loadCategory(Convert.ToInt32(idCategory));
             ToggleForm();
-
-            // Response.Redirect($"~/New.aspx?idCategory={idCategory}");
         }
 
         protected void Eliminar_Click(object sender, EventArgs e)
@@ -108,12 +107,12 @@ namespace CRUDTest
         protected void BtnCreate_Click(object sender, EventArgs e)
         {
             categoryIdHidden.Value = "0";
+            lblTitulo.Text = "Crear Categoría";
             ToggleForm();
         }
 
         private void loadCategory(int categoryId)
         {
-            lblTitulo.Text = "Editar Categoria";
             btnSubmit.Text = "Actualizar";
             categoryIdHidden.Value = categoryId.ToString();
 
