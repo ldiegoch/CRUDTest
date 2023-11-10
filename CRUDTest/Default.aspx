@@ -15,10 +15,10 @@
 
             <asp:GridView ID="Products" runat="server" CssClass="table table-bordered" AutoGenerateColumns="false">
                 <Columns>
-                    <asp:BoundField DataField="Id" HeaderText="Id" />
+                    <asp:BoundField DataField="Id" HeaderText="Id" HeaderStyle-Width="40px" />
                     <asp:BoundField DataField="Name" HeaderText="Nombre" />
-                    <asp:BoundField DataField="Price" HeaderText="Precio" DataFormatString="{0:C}" />
-                    <asp:BoundField DataField="CategoryName" HeaderText="CategoryName" />
+                    <asp:BoundField DataField="Price" HeaderText="Precio" DataFormatString="{0:n2}" HeaderStyle-Width="15%" ItemStyle-CssClass="price" />
+                    <asp:BoundField DataField="CategoryName" HeaderText="CategoryName" HeaderStyle-Width="30%" />
                 </Columns>
                 <EmptyDataTemplate>No encontramos productos asociados</EmptyDataTemplate>
             </asp:GridView>

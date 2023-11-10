@@ -13,6 +13,14 @@ textarea {
     max-width: 280px;
 }
 
+.price {
+    text-align: right;
+}
+
+.price::before {
+    content: "\20A1";
+}
+
 .table-header {
     display: flex;
 }
