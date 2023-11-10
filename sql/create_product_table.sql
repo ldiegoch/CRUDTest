@@ -7,5 +7,5 @@ CREATE TABLE [co].[coProducto]
 	nPrecioProd MONEY NOT NULL,
 	nIdCategori INT NOT NULL,
 	PRIMARY KEY (nIdProduct),
-	FOREIGN KEY (nIdCategori) REFERENCES [co].[coCategoria](nIdCategori)
+	FOREIGN KEY (nIdCategori) REFERENCES [co].[coCategoria](nIdCategori) ON DELETE CASCADE
 );
