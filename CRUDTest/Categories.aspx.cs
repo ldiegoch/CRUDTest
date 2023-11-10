@@ -29,6 +29,13 @@ namespace CRUDTest
             }
         }
 
+        protected void ToggleForm()
+        {
+            bool visibility = FormPanel.Visible;
+            FormPanel.Visible = !visibility;
+            BtnCreate.Visible = visibility;
+        }
+
         protected void LoadCategories()
         {
             var categoryRepository = new CategoryRepository();
@@ -41,8 +48,11 @@ namespace CRUDTest
         {
             LinkButton btn = (LinkButton)sender;
             string idCategory = btn.CommandArgument;
+            categoryIdHidden.Value = idCategory;
+            loadCategory(Convert.ToInt32(idCategory));
+            ToggleForm();
 
-            Response.Redirect($"~/New.aspx?idCategory={idCategory}");
+            // Response.Redirect($"~/New.aspx?idCategory={idCategory}");
         }
 
         protected void Eliminar_Click(object sender, EventArgs e)
@@ -71,6 +81,45 @@ namespace CRUDTest
             var productRepository = new ProductoRepositorio();
             List<Product> products = productRepository.GetProducts(categoryId);
             return products.Count > 0;
+        }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            Category categoria = new Category()
+            {
+                Id = Convert.ToInt32(categoryIdHidden.Value),
+                Name = txtNombre.Text,
+                IsActive = ckActiva.Checked,
+            };
+
+            bool respuesta;
+
+            if (categoria.Id != 0)
+                respuesta = categoryRepository.UpdateCategory(categoria);
+            else
+                respuesta = categoryRepository.CreateCategory(categoria);
+
+            if (respuesta)
+                Response.Redirect("~/Categories.aspx");
+            else
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('No se pudo realizar la operacion')", true);
+        }
+
+        protected void BtnCreate_Click(object sender, EventArgs e)
+        {
+            categoryIdHidden.Value = "0";
+            ToggleForm();
+        }
+
+        private void loadCategory(int categoryId)
+        {
+            lblTitulo.Text = "Editar Categoria";
+            btnSubmit.Text = "Actualizar";
+            categoryIdHidden.Value = categoryId.ToString();
+
+            Category category = categoryRepository.GetCategory(categoryId);
+            txtNombre.Text = category.Name;
+            ckActiva.Checked = category.IsActive;
         }
     }
 }
